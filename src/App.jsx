@@ -1,11 +1,23 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AuthLayout, MainLayout, HomePage, Login, Signup, Forgot, Error404 } from './pages'
 
 function App() {
   return (
-    <main>
-      React⚛️ + Vite⚡ + Replit🌀
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route index element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="forgot" element={<Forgot />} />
+        </Route>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+        <Route path='*' element={<Error404 />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
